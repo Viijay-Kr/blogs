@@ -5,6 +5,7 @@ import Renderer from "../../components/Renderer.astro";
 import BlogPostMeta from "../../components/BlogPostMeta.astro";
 import ContentLayout from "../../layouts/ContentLayout.astro";
 import { SITE_URL } from "../../config";
+import HeaderLink from "src/components/HeaderLink.astro";
 
 export async function getStaticPaths() {
   const posts = await readAll({
@@ -40,6 +41,7 @@ const ogImageAbsoluteUrl =
 ---
 
 <ContentLayout title={frontmatter.title} date={frontmatter.date}>
+  <li><HeaderLink href="/">Blog</HeaderLink></li>
   <BlogPostMeta
     title={frontmatter.title}
     description={frontmatter.external ? undefined : frontmatter.description}

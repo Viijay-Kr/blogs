@@ -1,7 +1,7 @@
 ---
 external: false
 title: "Typescript Langauge Service Plugins | Part 1"
-description: "Typescript plugins inside VS code extension runtime"
+description: "Typescript plugins using TS Config"
 date: 2022-03-03
 ---
 
@@ -9,7 +9,7 @@ Typescript language service plugins are great for intercepting typescript langua
 
 In the Part 1 of this post, I will outline some of the features of typescript plugins using a small example plugin. We will learn what they can do and how to enable them in a ts project.
 
-In Part 2 I will give you an overview of how VS code extension can leverage with typescript plugins using my own VS code extension [React CSS Modules](https://marketplace.visualstudio.com/items?itemName=viijay-kr.react-ts-css)
+In Part 2, lets learn how to embed typescript service plugins using a VS code extension (useful if you are extension developer) using my own VS code extension [React CSS Modules](https://marketplace.visualstudio.com/items?itemName=viijay-kr.react-ts-css)
 
 ## What are they ?
 
@@ -61,7 +61,7 @@ That is because TS langauge server doesn't speak CSS. So your editor cannot prov
 
 That's when TS language service plugins come into the picture. Luckily for `styled-components` users, there is already a great [plugin](https://github.com/styled-components/typescript-styled-plugin) added by styled-components maintainers which you can install in VS code or add it as a plugin to your tsconfig
 
-This plugin acts as middleman between the language server and your editor. Whenever it encounters the syntax 'styled.<element>', the plugin will take control over the various intellisense providers (completions, definitions etc) of your editor environment and provide the necessary intellisense for CSS langauge
+This plugin acts as middleman between the language server and your editor. Whenever it encounters the syntax 'styled.<element>', it takes control over the intellisense providers (completions, definitions etc of your editor environment that is running the langauge server) and provide the necessary intellisense for CSS langauge
 
 ## Usage
 
@@ -84,11 +84,7 @@ This plugin acts as middleman between the language server and your editor. Whene
    - In the above scenario of `styled-components` , the [`typescript-styled-plugin`](https://github.com/styled-components/typescript-styled-plugin) comes built in with the vs code extension [`vscode-styled-components`](https://github.com/styled-components/vscode-styled-components)
    - The extension under its hood uses the `typescript-styled-plugin`
 
-In this part of the post, lets create a small typescript plugin that does the following
-
-1. In a react project when you try 'Go to Defintion' on `useState` hook, instead of taking the developer to the declaration file, lets remove the entry.
-
-2. Part 2 will cover how VS code extension can use the plugin and send the user to a different location. For instance to the [beta docs](https://beta.reactjs.org/) of React.
+In this post, lets create a small typescript plugin that intercepts ['Go to Defintion'](https://code.visualstudio.com/docs/editor/editingevolved#_go-to-definition) action in VS code. For the purpose of this example, lets remove the defintion results of `useState` hook in `React` Projects
 
 ## Initial Setup
 
@@ -335,7 +331,7 @@ Lets first add the plugin to the `test-ts-plugin/tsconfig.json`
 
 Open `App.tsx` inside your VS code.
 
-Since the plugin is activated by `typescript-langauge-server` running inside VS code extension context, we can search for our plugin in ts server logs.
+Since the plugin is activated by `typescript-langauge-server` running inside VS code extension context, we can search for our plugin in ts server logs and see if the activation was successfull.
 
 Open VS code command pallete and run the following command
 
@@ -355,18 +351,18 @@ Now what did happen?. You asked TS langauge server to activate/load our plugin b
 
 So we need to add the plugin as a dependency. Lets add it as a dev dependency.
 
-Now if the plugin is available through npm , we might as well do
+Now if the plugin is available in npm , we might as well do
 
 ```bash
 yarn add -D ts-remove-usestate
 ```
 
-Since our plugin is not available in npm but only in our filesystem lets access it by adding
+Since our plugin is not available in npm but only in our filesystem lets ask yarn to install it by from our filesystem
 
 ```json
 {
   "devDependencies": {
-    "ts-remove-usestate": "file://<absolute_path_to_the_plugin>"
+    "ts-remove-usestate": "file://<full_path_to_the_plugin_in_your_file_system>"
   }
 }
 ```
@@ -377,13 +373,13 @@ Install it by running
 yarn
 ```
 
-Now lets Reload the whole vs code window by executing
+Now lets Reload the VS Code window by executing
 
 ```bash
 > Developer: Reload Window
 ```
 
-Its also important to choose the right Typescript version to test your plugin. Make sure to choose the workspace version of typescript by executing the following command in VS code command pallette
+It's also important to choose the right Typescript version to test your plugin. Make sure to choose the workspace version of typescript by executing the following command in VS code command pallette
 
 ```bash
 > Typescript: Select Typescript Version
@@ -520,4 +516,6 @@ function init({
 export = init;
 ```
 
-**Now what's next ?... Lets see how we can change the behaviour of `Go to Definition` using a VS code extension in Part 2**
+**Great 🤓 !! you've learnt to write typescript plugins**
+
+**Learn how to activate typescript plugins using VS Code extension in Part 2 of this post**

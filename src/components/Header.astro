@@ -1,14 +1,12 @@
 ---
 import DarkModeToggle from "./DarkModeToggle.astro";
+import HeaderLink from "./HeaderLink.astro";
 ---
 
 <header class="">
-  <a
-    class="unset absolute z-10 left-[50%] -top-[100rem] translate-x-[-50%] bg-white text-black px-8 py-2 focus:top-[initial]"
-    href="#main"
-  >
-    Skip to content
-  </a>
+  <ul class="unset flex flex-col text-text-bold gap-4 [&>li]:p-0 px-6">
+    <li><HeaderLink href="/">Home</HeaderLink></li>
+  </ul>
   <div
     class="justify-self-end py-2 flex items-center content-center text-text-bold"
   >
@@ -33,6 +31,7 @@ import DarkModeToggle from "./DarkModeToggle.astro";
   </div>
   <DarkModeToggle />
 </header>
+
 <style>
   header {
     grid-area: header;
