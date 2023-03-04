@@ -2,14 +2,14 @@
 external: false
 title: "Typescript Langauge Service Plugins | Part 1"
 description: "Typescript plugins using TS Config"
-date: 2022-03-03
+date: 2022-04-03
 ---
 
 Typescript language service plugins are great for intercepting typescript language servers. There aren't many resources available to back them up, unfortunately.
 
 In the Part 1 of this post, I will outline some of the features of typescript plugins using a small example plugin. We will learn what they can do and how to enable them in a ts project.
 
-In Part 2, lets learn how to embed typescript service plugins using a VS code extension (useful if you are extension developer) [React CSS Modules](https://marketplace.visualstudio.com/items?itemName=viijay-kr.react-ts-css), an extension I built to improve CSS modules experience in VS Code
+In [Part 2](/blog/typescript-plugin-part2), lets learn how to embed typescript service plugins using a VS code extension (useful if you are extension developer) [React CSS Modules](https://marketplace.visualstudio.com/items?itemName=viijay-kr.react-ts-css), an extension I built to improve CSS modules experience in VS Code
 
 ## What are they ?
 
