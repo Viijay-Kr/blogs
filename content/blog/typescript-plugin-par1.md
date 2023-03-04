@@ -9,7 +9,7 @@ Typescript language service plugins are great for intercepting typescript langua
 
 In the Part 1 of this post, I will outline some of the features of typescript plugins using a small example plugin. We will learn what they can do and how to enable them in a ts project.
 
-In Part 2, lets learn how to embed typescript service plugins using a VS code extension (useful if you are extension developer) using my own VS code extension [React CSS Modules](https://marketplace.visualstudio.com/items?itemName=viijay-kr.react-ts-css)
+In Part 2, lets learn how to embed typescript service plugins using a VS code extension (useful if you are extension developer) [React CSS Modules](https://marketplace.visualstudio.com/items?itemName=viijay-kr.react-ts-css), an extension I built to improve CSS modules experience in VS Code
 
 ## What are they ?
 
@@ -411,7 +411,7 @@ proxy.getDefinitionAndBoundSpan = (fileName, position) => {};
 
 The `getDefinitionAndBoundSpan` method recieves the `fileName` of VS code document that is active in your editor and the position where the `Go to Definition` was triggered
 
-Now ts server expects us to return meaning definition references in the shape defined by `getDefinitionAndBoundSpan`
+Now ts server expects us to return meaningful definition references in the shape defined by `getDefinitionAndBoundSpan`
 
 We can obtain the prior definitions by getting it from the langauge service like the following
 
@@ -426,10 +426,10 @@ proxy.getDefinitionAndBoundSpan = (fileName, position) => {
 };
 ```
 
-A list of `definitions` with the shape `ts.DefinitionInfo` under `prior.defintions`.
-If none are available then prior will be `undefined`.
+A list of `definitions` is inside `prior.defintions`.
+If none are available then `getDefinitionAndBoundSpan` will return `undefined` hence our prior will be empty so we could just return that.
 
-so lets handle the `undefined` case before do anything further
+so lets handle the `undefined` case before doing anything further
 
 ```ts
 /// Rest of the code above
@@ -440,7 +440,7 @@ if (!prior) {
 
 Now our desired goal(in this Part of the post) is to do nothing when `Go to Def` is triggered by `useState`. Before we do that lets first see what happens when you initiate `Go to Def` on `useState`
 
-It should take you to the official react type def file and more specifically to this location in the file
+It should take you to the official react type definitions file and more specifically to this location in the file
 
 ```ts
 /**
@@ -469,13 +469,13 @@ Lets test this.
 
 **_NOTE: Make sure to re install the plugin in the `examples/test-ts-plugin` by doing a fresh install of node_modules. Alternative use `yarn link` to avoid re installation. In anycase make sure to use the workspace version of typescript_**
 
-After restarting the ts server , if you try to `Go to Definition` of `useState` the editor will no longer take you there.
+After restarting the ts server , if you try `Go to Definition` on `useState` the editor will no longer take you there.
 
-If this happens then our plugin succesfully intercepted `Go to Definition` and removed use state from the results.
+If this happens then our plugin succesfully intercepted `Go to Definition` and removed `useState` from the final results.
 
-Yay!!
+Yay!! Our job is done. We have successully managed to intercept defintion provider of VS code.
 
-Putting it all together
+Great! Putting it all together
 
 ```ts
 // src/index.ts
