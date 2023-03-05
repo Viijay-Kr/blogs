@@ -3,7 +3,7 @@ external: false
 title: "Typescript Language Service Plugins | Part 2"
 description: "Typescript plugins inside VS code extension runtime"
 draft: false
-date: 2022-03-04
+date: 2022-03-05
 ---
 
 In [Part 1](/blog/typescript-plugin-par1) of this series, you learnt how to write and enable TS service plugins using `tsconfig.json`
