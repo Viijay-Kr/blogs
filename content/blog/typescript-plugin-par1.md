@@ -1,13 +1,13 @@
 ---
 external: false
-title: "Typescript Langauge Service Plugins | Part 1"
+title: "Typescript Language Service Plugins | Part 1"
 description: "Typescript plugins using TS Config"
-date: 2022-04-03
+date: 2022-03-04
 ---
 
 Typescript language service plugins are great for intercepting typescript language servers. There aren't many resources available to back them up, unfortunately.
 
-In the Part 1 of this post, I will outline some of the features of typescript plugins using a small example plugin. We will learn what they can do and how to enable them in a ts project.
+In the Part 1 of the series, I will outline some of the features of typescript plugins using a small example plugin. We will learn what they can do and how to enable them in a ts project.
 
 In [Part 2](/blog/typescript-plugin-part2), lets learn how to embed typescript service plugins using a VS code extension (useful if you are extension developer) [React CSS Modules](https://marketplace.visualstudio.com/items?itemName=viijay-kr.react-ts-css), an extension I built to improve CSS modules experience in VS Code
 
@@ -57,11 +57,11 @@ export const Button = styled.button`
 
 Yeah you guessed it right. Sadly You won't!
 
-That is because TS langauge server doesn't speak CSS. So your editor cannot provide any CSS related intellisense.
+That is because TS language server doesn't speak CSS. So your editor cannot provide any CSS related intellisense.
 
 That's when TS language service plugins come into the picture. Luckily for `styled-components` users, there is already a great [plugin](https://github.com/styled-components/typescript-styled-plugin) added by styled-components maintainers which you can install in VS code or add it as a plugin to your tsconfig
 
-This plugin acts as middleman between the language server and your editor. Whenever it encounters the syntax 'styled.<element>', it takes control over the intellisense providers (completions, definitions etc of your editor environment that is running the langauge server) and provide the necessary intellisense for CSS langauge
+This plugin acts as middleman between the language server and your editor. Whenever it encounters the syntax 'styled.<element>', it takes control over the intellisense providers (completions, definitions etc of your editor environment that is running the language server) and provide the necessary intellisense for CSS language
 
 ## Usage
 
@@ -88,7 +88,7 @@ In this post, lets create a small typescript plugin that intercepts ['Go to Defi
 
 ## Initial Setup
 
-For this example I'm gonna use pnpm as package manager. Also the source is available in github for your reference.
+For this example I'm gonna use `pnpm` as package manager. Also the source is available on [github](https://github.com/Viijay-Kr/ts-remove-usestate) for your reference.
 
 Open your favourite termnial and create a directory called `ts-remove-usestate` which is what we will call our plugin.
 
@@ -160,7 +160,7 @@ We will create examples folder later when [enabling](#enabling) our plugin in re
 
 Lets create a `src` directory and new `index.ts` file
 
-When your plugin is listed in `tsconfig.json` , the `typescript-langauge-server` identifies the plugin using the name and it will look for a init function exported from the module.
+When your plugin is listed in `tsconfig.json` , the `typescript-language-server` identifies the plugin using the name and it will look for a init function exported from the module.
 
 So lets start by creating our `init` function in `index.ts`
 
@@ -222,7 +222,7 @@ function create(info: ts.server.PluginCreateInfo) {
 /// rest of the code below
 ```
 
-> Decorator pattern through Object.create is used here to avoid any effects on the main langauge server instance. Any behavioural change we might add to the proxy instance will not affect the main language server instance.
+> Decorator pattern through Object.create is used here to avoid any effects on the main language server instance. Any behavioural change we might add to the proxy instance will not affect the main language server instance.
 
 Putting it all together
 
@@ -331,7 +331,7 @@ Lets first add the plugin to the `test-ts-plugin/tsconfig.json`
 
 Open `App.tsx` inside your VS code.
 
-Since the plugin is activated by `typescript-langauge-server` running inside VS code extension context, we can search for our plugin in ts server logs and see if the activation was successfull.
+Since the plugin is activated by `typescript-language-server` running inside VS code extension context, we can search for our plugin in ts server logs and see if the activation was successfull.
 
 Open VS code command pallete and run the following command
 
@@ -347,7 +347,7 @@ Search for our plugin name `ts-remove-usestate` inside the logs. You should see 
 
 in your server log.
 
-Now what did happen?. You asked TS langauge server to activate/load our plugin but it couldn't find it in your `node_modules`.
+Now what did happen?. You asked TS language server to activate/load our plugin but it couldn't find it in your `node_modules`.
 
 So we need to add the plugin as a dependency. Lets add it as a dev dependency.
 
@@ -413,7 +413,7 @@ The `getDefinitionAndBoundSpan` method recieves the `fileName` of VS code docume
 
 Now ts server expects us to return meaningful definition references in the shape defined by `getDefinitionAndBoundSpan`
 
-We can obtain the prior definitions by getting it from the langauge service like the following
+We can obtain the prior definitions by getting it from the language service like the following
 
 ```ts
 proxy.getDefinitionAndBoundSpan = (fileName, position) => {
@@ -518,4 +518,4 @@ export = init;
 
 **Great 🤓 !! you've learnt to write typescript plugins**
 
-**Learn how to activate typescript plugins using VS Code extension in Part 2 of this post**
+**Learn how to activate typescript plugins using VS Code extension in [Part 2](/blog/typescript-plugin-part2) of this post**

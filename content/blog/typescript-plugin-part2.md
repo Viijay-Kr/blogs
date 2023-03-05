@@ -2,7 +2,6 @@
 external: false
 title: "Typescript Langauge Service Plugins | Part 2"
 description: "Typescript plugins inside VS code extension runtime"
-draft: false
 date: 2022-03-04
 ---
 
@@ -45,15 +44,15 @@ For instance , if you prefer not to see definitions results from a declaration f
 }
 ```
 
-`modules` is the config option used by the plugin to do its job
+`modules` is the config option used by the plugin to filter our definition results.
 
-For `React CSS Modules` the plugin filters out unnecessary definition results from declaration files that adds TS declaration to CSS modules.
+For `React CSS Modules` the plugin filters out unnecessary definition results from declaration files that adds declarations to CSS modules.
 
-For instance in the Vitejs project we created in Part 1, CSS module class `selector` definitions are resolved by a declaration file provided by Vite over here [`node_modules/vite/client.d.ts`](). Typescript language server built inside VS code uses this as reference for the selectors.
+For instance in the Vitejs project we created in Part 1, CSS module class `selector` definitions are resolved by a declaration file provided by Vite over here [`node_modules/vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts#L4). Typescript language server built inside VS code uses this as reference for any selector definition.
 
 So when you trigger `Go to Definition` on any class selector say `styles.someSelector`, VS code will take you to the above declaration file.
 
-Now `React CSS modules` want its users to go to the corresponding CSS module and to the location of the selector inside the module when they trigger `Go To Definition` on class selectors. The definition result from Vite is not useful. So it's best to avoid it alltogether thereby giving a nice experience to the developer.
+Now `React CSS modules` want its users to go to the corresponding CSS module and to the location of the selector inside the module when they trigger `Go To Definition` on class selectors. The definition result from Vite's declration file is not that useful. So it's best to avoid it alltogether to give a nice experience to the developer.
 
 `React CSS modules` is able to accomplish this by including `typescript-cleanup-defs` as a Typescript server plugin
 
@@ -63,11 +62,11 @@ We already know how to enable plugins through `tsconfig.json` (from Part 1).
 
 However in VS code extension context the plugin is enabled by the extension at runtime.
 
-You can accomplish this by adding `typescriptServerPlugins` field to the `contributes` section of extension's `package.json`
+You can accomplish this by adding `typescriptServerPlugins` field to the `contributes` section of your extension's `package.json`
 
 ```json
   "contributes":{
-    ...config
+    // ...rest of your contributions
     "typescriptServerPlugins": [
      {
        "enableForWorkspaceTypeScriptVersions": true,
@@ -81,4 +80,57 @@ You can accomplish this by adding `typescriptServerPlugins` field to the `contri
 
 Now when the extension is activated by any typescript based projects, extension runtime will tell TS server to load the plugin specified in the list of `typescriptServerPlugins`
 
-With this there is a three way connection established between your VS Code Editor , your extension and the plugin
+With this there is a connection established between your TS server run by your VS Code Editor and the plugin which is enabled by your extension.
+
+## Configuring the plugin
+
+Configuring the plugin inside VS code extension context is not as straightforward as configuring in `tsconfig.json`.
+
+Any plugin must be configured during the activation of your extension. Here is the appraoch used by `React CSS Modules`
+
+```ts
+const syncTsPlugin = async () => {
+  const ext = extensions.getExtension("vscode.typescript-language-features");
+  if (ext) {
+    if (!ext.isActive) {
+      await ext.activate();
+    }
+    const tsAPi = ext.exports.getAPI(0);
+    tsAPi.configurePlugin("typescript-cleanup-definitions", {
+      name: "typescript-cleanup-definitions",
+      modules: Settings.cleanUpDefs,
+      enable: Settings.tsCleanUpDefs,
+    });
+  }
+};
+```
+
+Now there is a bunch of this going on here.
+
+`synTsPlugin` gets the `typescript-language-features` from the extension context, activates it if it's not already active and configures the plugin by invoking the `configurePlugin` function that is exposed by the `typescript-language-features` extension.
+
+Notice how the configuration options such as `name`,`module` and `enable` are being passed as arguments and the first arugment is always the name of the plugin that you specify in `package.json`
+
+`syncTsPlugin` is invoked by the `activate` function of the extension once during the activation phase. This ensures the plugin is loaded and activated if its not already. Optionally you can also invoke it inside configuration change event.
+
+```ts
+workspace.onDidChangeConfiguration(async (e) => {
+  if (e.affected) {
+    syncTsPlugin();
+  }
+});
+```
+
+This will make sure the plugin is synchronized with your extension settings when they are modified by the user.
+
+That's it when your extension is installed and activated by the user , the plugin should also be loaded by the TS server.
+
+## Wrapping it Up
+
+I hope you got an idea of Typescript language service plugin's anatomy and how it helps to improve or change your editing experience in VS code. Of course there are numberous use cases you can try out with Service Plugins. In futures posts I will try to cover more about debugging plugins inside VS code to help your local workflow.
+
+['Writing Language Servie Plugin'](https://github.com/microsoft/TypeScript/wiki/Writing-a-Language-Service-Plugin) is definitely a good read to get started if you plan to write your own plugin.
+
+With this I conclude my two part series on Typescript Language Service Plugins.
+
+Happy Hacking 🤓
