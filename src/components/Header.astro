@@ -11,16 +11,20 @@ import HeaderLink from "./HeaderLink.astro";
     class="justify-self-end py-2 flex items-center content-center text-text-bold"
   >
     <a
-      class="unset ml-4 rounded-sm transition-[background-size] duration-150 ease-in-out bg-left-bottom bg-[length:0%_55%] hover:bg-[length:100%_55%] bg-no-repeat bg-gradient-to-r from-primary-yellow to-primary-yellow dark:bg-none dark:hover:text-primary-yellow"
+      class="unset header-links ml-4 rounded-sm transition-[background-size] duration-150 ease-in-out bg-left-bottom bg-[length:0%_55%] hover:bg-[length:100%_55%] bg-no-repeat bg-gradient-to-r from-primary-yellow to-primary-yellow dark:bg-none dark:hover:text-primary-yellow"
       href="https://github.com/Viijay-Kr"
+      title="Github"
+      target="__blank"
     >
       <i class="fa-brands fa-github" aria-hidden="true" title="Vijay on Github"
       ></i>
       <span>GitHub</span>
     </a>
     <a
-      class="unset ml-4 rounded-sm transition-[background-size] duration-150 bg-left-bottom bg-[length:0%_55%] hover:bg-[length:100%_55%] bg-no-repeat bg-gradient-to-r from-primary-blue to-primary-blue dark:bg-none dark:hover:text-primary-blue"
+      class="unset header-links ml-4 rounded-sm transition-[background-size] duration-150 bg-left-bottom bg-[length:0%_55%] hover:bg-[length:100%_55%] bg-no-repeat bg-gradient-to-r from-primary-blue to-primary-blue dark:bg-none dark:hover:text-primary-blue"
       href="https://twitter.com/reactporiyalar"
+      title="Github"
+      target="__blank"
     >
       <i
         class="fa-brands fa-twitter"
@@ -43,3 +47,21 @@ import HeaderLink from "./HeaderLink.astro";
       );
   }
 </style>
+
+<script>
+  const links = document.querySelectorAll(".header-links");
+  links.forEach((el) => {
+    const title = el.getAttribute("title") ?? "";
+    const href = el.getAttribute("href") ?? "";
+    el.addEventListener("click", () => {
+      window.Insights.track({
+        type: "click",
+        meta: {
+          title,
+          value: href,
+          source: "header",
+        },
+      });
+    });
+  });
+</script>

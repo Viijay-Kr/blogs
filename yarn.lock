@@ -1781,6 +1781,11 @@ inherits@^2.0.3, inherits@^2.0.4:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
+insights-kit@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/insights-kit/-/insights-kit-1.2.1.tgz#0aac3c0880ac79c3eeb0d07f77887a86fdb32b5c"
+  integrity sha512-J7YKq7AoGlz5Qhq4UIRZKz66OJd13ABvocgLWCTMN3PI+9vMnCls5Zn4evRQnoEGgRbB7d9SCNvOdLHoI9+XNQ==
+
 is-alphabetical@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/is-alphabetical/-/is-alphabetical-2.0.1.tgz#01072053ea7c1036df3c7d19a6daaec7f19e789b"

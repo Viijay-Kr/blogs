@@ -38,7 +38,8 @@ const sortedPosts = posts
                 <a
                   href={post.frontmatter.url}
                   target="_blank"
-                  class="unset
+                  title={post.frontmatter.title}
+                  class="unset blog-title
                         transition-[background-size] duration-300 
                         bg-gradient-to-r bg-left-bottom bg-no-repeat
                         bg-[length:0%_55%] hover:bg-[length:100%_55%] dark:bg-[length:0%_2px] hover:dark:bg-[length:100%_2px]
@@ -53,7 +54,8 @@ const sortedPosts = posts
               ) : (
                 <a
                   href={`/blog/${post.slug}`}
-                  class="unset
+                  title={post.frontmatter.title}
+                  class="unset blog-title
                         transition-[background-size] duration-300 
                         bg-gradient-to-r bg-left-bottom bg-no-repeat
                         bg-[length:0%_55%] hover:bg-[length:100%_55%] dark:bg-[length:0%_2px] hover:dark:bg-[length:100%_2px]
@@ -75,3 +77,21 @@ const sortedPosts = posts
     }
   </ul>
 </section>
+
+<script>
+  const links = document.querySelectorAll(".blog-title");
+  links.forEach((el) => {
+    const title = el.getAttribute("title") ?? "";
+    const href = el.getAttribute("href") ?? "";
+    el.addEventListener("click", () => {
+      window.Insights.track({
+        type: "click",
+        meta: {
+          title,
+          value: href,
+          source: "home",
+        },
+      });
+    });
+  });
+</script>

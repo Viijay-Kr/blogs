@@ -1,5 +1,6 @@
 ---
 ---
+
 <mode-toggle class="flex">
   <button
     class="justify-self-end bg-black dark:bg-white ml-4 inline-flex h-6 w-11 items-center rounded-full"
@@ -85,6 +86,15 @@
             updateStorageTheme(modeToSwitch);
             currentMode = modeToSwitch;
           }
+
+          window.Insights.track({
+            type: "click",
+            meta: {
+              source: "header",
+              title: "Theme",
+              value: currentMode,
+            },
+          });
 
           // prevent slide animation on page load for dark mode
           if (!iconElem.classList.contains("duration-300")) {
