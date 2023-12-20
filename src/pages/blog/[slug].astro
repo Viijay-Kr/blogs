@@ -40,7 +40,14 @@ const ogImageAbsoluteUrl =
     : undefined;
 ---
 
-<ContentLayout title={frontmatter.title} date={frontmatter.date}>
+<ContentLayout
+  heroImage={{
+    url: frontmatter.heroImageUrl,
+    alt: frontmatter.heroImageAlt,
+  }}
+  title={frontmatter.title}
+  date={frontmatter.date}
+>
   <li><HeaderLink href="/">Blog</HeaderLink></li>
   <BlogPostMeta
     title={frontmatter.title}
