@@ -4,6 +4,7 @@ title: "Typescript Language Service Plugins | Part 1"
 description: "Typescript plugins using TS Config"
 date: 2022-03-05
 heroImageUrl: "https://miro.medium.com/v2/resize:fit:1200/1*NWvQepJvLQJLZLkLbNnEzA.png"
+ogImagePath: "https://miro.medium.com/v2/resize:fit:1200/1*NWvQepJvLQJLZLkLbNnEzA.png"
 heroImageAlt: "Architecture of LSP"
 ---
 

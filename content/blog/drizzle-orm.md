@@ -1,14 +1,15 @@
 ---
 external: false
 title: "Do yourself a favour by including \"drizzle-orm\" in your stack"
-description: "Including drizzle-orm in your backend can significantly increase your producitivty. Learn more here and start using drizzle-orm if you are not"
+description: "Including drizzle-orm in your backend stack can significantly increase your productivity. Read more here about the nuances of drizzle-orm. Start using drizzle-orm if you are not"
 date: 2023-12-20
 heroImageUrl: "https://miro.medium.com/v2/resize:fit:1200/1*NWvQepJvLQJLZLkLbNnEzA.png"
+ogImagePath: "https://miro.medium.com/v2/resize:fit:1200/1*NWvQepJvLQJLZLkLbNnEzA.png"
 heroImageAlt: "Architecture of LSP"
 ---
 
 ## History TL;DR
-Working with databases outside console environment over time evolved to be a daunting experience for developers. Translating the following simple `SQL` query into your favourite langauge seemed naturally simple
+Working with databases over time has evolved to be a daunting experience for developers. Embedding `SQL` statements in your favorite language seemed naturally simple 
 
 ```sql
   # raw sql
@@ -21,39 +22,41 @@ Working with databases outside console environment over time evolved to be a dau
   const result = await dbClient.execute(query)
 ```
 
-Arguably this works. Although for how long? You can't keep writing complex queries inside template literals without type safety for a long time. At a certain point you will feel like you are missing a pattern , a structure , a safety if you will!. This is where `ORM` really shines 💡. 
+Arguably this works. Although for how long? You can't keep writing complex queries inside template literals without type safety. At a certain point you start to feel like you are missing a pattern, an abstraction, a safety if you will!. This is where `ORM` really shines💡. 
 
-`ORM` short for `O`bject `R`elational `M`apping is a higher level abstraction of your database models/schemas into langauge specfic objects. `Schemas` or `Models` represent the strucutre of your database tables in a object oriented pattern
-
-For instance the above query using any `typescript` ORM may look like the following
+`ORM` short for **O**bject **R**elational **M**apping is a higher level abstraction/mapping of database tables and schemas into language specific objects/instances. For instance the above query using any `typescript` ORM may look like the following
 ```ts
   const result = db.users.findMany().where(users.name===name);
 ```
-Assume the ORM your are using wraps your whole database in an instance called `db` of the class `Db`. Now the instance `db` has access to the `table` namely `users` which in itself is an instance of class called `Table`. Now `users` can perform sql operations on the database using the functions provided by the class `Table` i.e `findMany` which is equivalent to a select operation in SQL .
+Internally the ORM your are using wraps your whole database in an instance called `db` of the class `Db`. Now the instance `db` has access to the `table` namely `users` which in itself is an instance of class called `Table`. Now `users` can perform sql operations on the database using the functions provided by the class `Table` i.e `findMany` which is equivalent to a select operation in SQL.
 
-Bind all this with typesafety. BAM!!💥 you get a nice builder strategy abstraction for working with your database tables with typesafety and easy to use abstraction.
+Bind all this with type safety, operations, schemas, BAM!!💥 you get a nice abstraction for working with your database tables with type safety and easy to use utilities.
 
 The strategy with which you perform SQL operations might differ from ORM to ORM but they are all based on Object Oriented patterns.
 
 ## Modern ORM's
-Modern languages has a vareity of ORM's in the open. `python` has [django](), popular web framework with builtin orm. `golang` has [GORM](). 
+Modern languages has a variety of ORM's in the open. `python` has [django](https://docs.djangoproject.com/en/5.0/topics/db/queries/), popular web framework with builtin **ORM**. `golang` has [GORM](https://gorm.io/index.html). 
 
-Javascript almost for a decade lived without typescript. [Typeorm]() was one of the earliest ORMs introduced in the javascript community which is also quite popular and still used by millions of developers. Other players like [Mongoose]() [Sequelize](),[knex.js]() are also popular open source projects that provide a decent developer experience. 
+Javascript almost for a decade lived without typescript. So most ORMs in the pre typescript era was based on javascript. However such tools have started adopting typescript into their frameworks to provide the type flavours you need today 
 
-However the beginning of this decade was marked by introduction of [Prisma]() the most go to orm for typescript that focuses fully on typesafety , seamless migrations , flexible relationship patterns , great tooling powered by `rust`
+[TypeOrm](https://typeorm.io/) was one of the earliest ORMs introduced in the javascript community which is also quite popular and still widely used. Other players like [Mongoose](https://mongoosejs.com), [Sequelize](https://sequelize.org/), [knex.js](https://knexjs.org/) are also popular open source projects that provide a decent developer experience. 
 
-Honestly I have been pretty impressed by the experience I had with prisma until I found [drizzle-orm](). Drizzle according to me was started to overcome the pitfalls of Prisma and write sql that feels more natural with absolute typesafety.  
+However the beginning of this decade was marked by the introduction of [Prisma](https://www.prisma.io/), the most go to solution for typescript projects. Prisma focuses on type safety, seamless migrations, flexible relationship patterns and a great tooling powered by `rust`
 
-In this blog , I will be using a small side project of mine ([trackify]()) to demonstrate how quickly I got comfortable working with drizzle-orm
+Honestly I have been pretty impressed by the experience I had with prisma until I found [**drizzle-orm**](https://orm.drizzle.team/docs/overview). To me drizzle turned out to be a great alternative to overcome the pitfalls I had with Prisma. It lets you write **SQL** statements that feels more natural and comes with great type safety.  
+
+In this blog , I will be using a small side project of mine [trackify](https://trackify-viijay-kr.vercel.app/) to demonstrate how quickly I got comfortable working with drizzle-orm
 
 ## Prisma is great but...
-Like I said before , I don't hate prisma . It has a great tooling , amazing devX. Although not focusing on performance in this article it definitely is a popular choice. However in comparision to drizzle-orm I most certainly think drizzle offers a even better devX in terms of ease of use ,amazing typesafety and overall a tremendous speed.
+Like I said before I don't hate prisma. It's tooling is great. Amazing devX. Although not focusing on performance in this article, it definitely is a popular choice. However in comparison to drizzle-orm I most certainly think that drizzle offers a even better devX in terms of ease of use, amazing type safety and a tremendous speed.
 
-The major problem with prisma for me is the learning curve is a bit high although quick to get there. Writing your schema in `.prisma` language is something I would not do when you have drizzle that asks you to write your schemas in plain typescript 
+The major problem with prisma for me is the learning curve. It is a bit high for me yet quick to get there. Writing your schema in `.prisma` SDL is something I would not prefer when you have drizzle that lets you to define your schemas in plain typescript 
 
 > Note: If you are looking to get started with drizzle-orm. Check out their docs and try it in your sample project and come back here. I will be starting the demos without the setup and quick starts. Also this blog doesn't focus too much on the tooling such as 'drizzle-kit' and 'drizzle-studio'.
 
-In my project the first table I created in my database is `spaces` . With `drizzle-orm` you can do that by creating a file called `./db/schemas/spaces.ts`
+## First Schema 
+I use [PlanetScale's](https://planetscale.com/) mysql database in my project. So all the schemas are specific to PlanetScale's requirements.
+In my project the first table I created in my database is `spaces`. With `drizzle-orm` you can do that by creating a file called `./db/schemas/spaces.ts`
 
 ```ts
  import { datetime, mysqlTable, serial, varchar } from "drizzle-orm/mysql-core";
@@ -66,25 +69,27 @@ In my project the first table I created in my database is `spaces` . With `drizz
   owner: varchar("owner", { length: 256 }).notNull(),
  });
 ```
-The above code creates a table called `spaces` by using the method called `mysqlTable` which takes a record of items to make columns for the table
+The above code creates a table called `spaces` with the help `mysqlTable` from `mysql-core` package which takes a record of items to make columns for the table
 
-As you can see it's just plain typescript with a pinch of object oriented flavours. So easy and no need for you to learn a new langauge besides the one you already know.
+> Drizzle also offers core packages that support other database drivers such as postgress,mongo etc
 
-Obviously there is a bit of learning initially that you need to do but as far I am concerned I was able to do that in my editor (VS Code) with type completions and type definitions. So I felt it was a great improvement compared to prisma where you need to know by heart the syntactic sugars of the langauge.
+As you can see it's just plain typescript with rich object oriented flavours. So easy and no need for you to learn a new language besides the one you already know.
+
+Obviously there is a bit of learning that you need  to do but as far I am concerned I was able to do that in my editor (VS Code) with type completions and type definitions. So I felt it was a great improvement compared to prisma where I needed to know the syntactic sugars of the language.
 
 ## Querying
 Ultimately any good ORM should offer the same seamless experience you get with writing your schemas when it comes to writing queries. 
 
-Drizzle did not disappoint me in that area too. Learning to write queries felt like learning numbers in German(which is the easiest of all).
+Drizzle did not disappoint me in that area too. Learning to write queries felt like learning numbers in German (which is the easiest of all).
 
-To get all spaces of an user "vj" you can do 
+To get all spaces of an user you can do 
 
 ```ts
 const spaces = await db.query.spaces.findMany({
     where: eq(spaces.owner,"vj")
 })
 ```
-Here inside the `where` clause I've used a function called `eq`. `eq` is one of the many  utility method provided by drizzle to write neat comparisions where clauses. So they are nothing but [operators]().
+Here inside the `where` clause I've used a function `eq`. `eq` is one of the many utility methods provided by drizzle to write neat operators inside where clause.
 
 You can also use the other variant `select` instead of `query` which feels more like writing SQL in typescript
 
@@ -92,7 +97,7 @@ You can also use the other variant `select` instead of `query` which feels more 
 const spaces = await db.select().from(spaces).where(eq(spaces.owner,user.id))
 ```
 
-Select also gives you option to select only certain fields from the table by doing
+With `select` you have the option to select only the fields your need from the table by doing
 ```ts
 const spaces = await db
     .select({
@@ -102,9 +107,10 @@ const spaces = await db
     .where(eq(spaces.owner,"vj"));
 ```
 
-## Insert
+> Majority of my queries were using `select`. At first I did miss the ability to [**include relations**](#including-relations)  with `select`. However I later realized that is a valid limitation with respect to the design of the ORM
 
-Insert is no different from queries you can simply write
+## Insert
+Insert is no different from queries. You can simply write
 
 ```ts
 const result = await db.insert(spaces).values({
@@ -114,11 +120,9 @@ const result = await db.insert(spaces).values({
 });
 ```
 
-The result of the insert operations provides you the inserted id which is helpful for routing and navigation. So that is nice 
-
+The insert operation returns a result with the `insertedId` which is helpful for routing. So that is nice 
 
 ## Update
-
 Update is again a cake walk
 
 ```ts
@@ -128,10 +132,12 @@ const result = await db.update(spaces).set({
 }).where(eq(spaces.id,"1"));
 ```
 
-I am not even going to go into `delete`. By now you know how simple it could be so you'll figure it out without my help.
+I'll save some time by skipping [**delete**](https://orm.drizzle.team/docs/delete). By now you know how simple it is
+
+> All the CRUD operations have their own functional features with respect to the database you are using. So do check the drizzle docs to learn more about driver specific features.
 
 ## Typescript magic
-So far you saw how simple it was to perfrom CRUD on a table with great completions. However I missed a important thing to cover in the previous sections `typesafety`. 
+So far you saw how simple it was to perform CRUD on a table with great completions. However I missed a important thing to cover in the previous sections `type safety`. 
 
 Drizzle offers great utilities for you to expose the type information of schemas by doing the following.
 
@@ -141,32 +147,37 @@ Drizzle offers great utilities for you to expose the type information of schemas
   // ...
  })
 
+ // This my personal preferance when it comes to naming the types.
  export type Select_Space = typeof spaces.$inferSelect;
  export type Insert_Space = typeof spaces.$inferInsert;
- // This my personal preferance when it comes to naming the types.
 ```
-Drizzle uses the inferrence nature of typescript to create a solid type strucutre for your tables. These exposed types will be useful when dealing with sql operations. The `Inser_Space` is smart enough to know which fields are optional so when you use it in a function say `createSpace`
+Learn more about the type api [here](https://orm.drizzle.team/docs/goodies#type-api)
+
+Drizzle uses the inference nature of typescript to create a solid type definitions for your tables. These exposed types will be useful for casting types into your business logic. The `Insert_Space` is smart enough to know which fields are optional so when you use it in a function say `createSpace`
 
 ```ts
  function createSpace(row:Insert_Space){
   const result = await db.insert(spaces).values(row)
  }
 ```
-you get the best type information that you need for the parameter `row`. Since `id` has `auto_increment` constraint it's optional.So `Insert_Space` knows it's optional. Pretty cool isn't ? 🤓
+you get the best type information that you need for the parameter `row`. Since `id` has `auto_increment` constraint it's optional. So `Insert_Space` knows it's optional. Pretty cool isn't ? 🤓
 
-If you look at this inference pattern more closely you will see a glimpse of [`zod`]() in it. We all know how great zod is 🤓
+If you look at this inference pattern more closely you will see a glimpse of [**zod**](https://zod.dev/) in it. We all know how great **zod** is 🤓
 
 ## Working with Relationships
 
-Relationships are hard to make and maintain. Hey wait I meant in the database world (not in real life). The standout feature of drizzle for me is the [`relationships`]() model. Unlike prisma you are going to write typescript and .prisma so naturally it felt so much easier for me to create relationships in drizzle
+Relationships are hard to make and maintain. Hey wait I meant in the database world (not in real life). The standout feature of drizzle for me is the [**relationship**](https://orm.drizzle.team/docs/rqb#declaring-relations) model. 
 
-Honestly I struggled a lot with prisma to model my relationships.At first it felt so much harder to comprehend the relationships between models in prisma schema. It still is by the way.
+Unlike prisma you are going to write typescript and not **.prisma SDL** so naturally it felt so much easier for me to create relationships in drizzle
 
-However in drizzle you define relationhips as another entity in your database. You treat relationships as door hatch that connects multiple rooms
+Honestly I struggled a lot with prisma to model my relationships. At first it felt so much harder to comprehend the relationships between models in prisma schema. It still is by the way.
+
+However in drizzle you don't define relationships as another entity in your database but rather as an abstraction. They act as door hatch that connects multiple levels of rooms
 
 ### One to Many
+**One to many** or **Many to one** is the simplest form of relationship you can create with drizzle. In my project I created the first **one to many** relationship between `spaces` and new table called `projects`. 
 
-One to many or many to one is the simplest form of relationship you can create with drizzle. In my project I was required express a relationship between `spaces` and new table called `projects`. A space can have many `projects` and a project can belong to only one `space`. A classic one to many relationship. With drizzle you can do this by doing the following
+A space can have many `projects` and a project belongs to only one `space`. A classic one to many relationship. With drizzle you can do this by using the `relations` utility.
 
 ```ts
   import { relations } from "drizzle-orm";
@@ -202,9 +213,9 @@ I create a new table called `projects` with a `space_id` field which of the same
   }));
 ```
 
-I define `projectToSpaceRelations` that creates the relatioship between `spaces` and `projects` table. 
+I define `projectToSpaceRelations` that creates the relationship between `spaces` and `projects` table. 
 
-The method `relations` takes the table as first argument and a callback as second. The callback is supplied with various ways with which you can form your relationships. In the first case I use the function `one` to form a 'one' form of relationship with `spaces` table using the field `projects.space_id`, referenced by `spaces.id` denoting that a project can belong to only one space
+The method `relations` takes the table `projects` as first argument and a callback as second. The callback is supplied with various ways with which you can form your relationships (one,many). I use the function `one` to create a relationship called `space` which indicates that one record from `spaces` table referenced by the field `spaces.id` is connected to the `projects` table using the field `projects.space_id`
 
 ```ts
   export const spaceToProjectsRelation = relations(spaces,({many})=>({
@@ -212,51 +223,12 @@ The method `relations` takes the table as first argument and a callback as secon
   }));   
 ```
 
-Similarly `spaceToProjectsRelation` denotes the 'many' form of the relatioship between `spaces` and `projects` denoting that a space can have many projects belonging to it
-
-There is also another way of making relationships between tables which is using foreign keys pattern.
-
-```ts
-  export const projects = mysqlTable("projects", {
-    id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-    name: varchar("name", { length: 256 }).notNull(),
-    space_id: bigint("space_id").references(()=>spaces.id),
-    // ...
-  });  
-```
-Using `references` you add a foreign key constraint using the field space_id which is useful for performing cascade actions. You can find more about that [here]()
+Similarly in `spaceToProjectsRelation`  'many' utility creates a relationship between `spaces` and `projects` denoting that a space can have many projects belonging to it
 
 > NOTE: One to one is also made using the same approach by using the "one" utility on both sides
 
-Drizzle declares that the relationships created using `relations` are just an abstraction you need to make your life easier and doesn't do anything to your database schema (execept adding foreign key constraint when `references` is used).
-
-Querying relationships become super simple with the help of `relations`. For instance if I want to query a space with all the projects belonging to a space I can do 
-
-```ts
-  const spacesWithProjects = db.query.spaces.findMany({
-    where:eq(spaces.owner,"vj"),
-    with:{
-        projects:true
-    }
-  })
-```
-
-Here I have used the special `with` operator inside `findMany` which you can use to include the corresponding relations of the table. So drizzle internally does a join of two tables with the referencing information that it has. 
-The beauty of using `with` is that it is chainable as deep as you need. Meaning if `projects` has its own relations say `tasks` then you can include them too by doing
-
-```ts
-  const spacesWithProjects = db.query.spaces.findMany({
-    where:eq(spaces.owner,"vj"),
-    with:{
-        projects: {
-            tasks:true
-        }
-    }
-  })
-```
-
 ### Many to Many
-Building "Many to Many" relationship in my project was a bit challenging at the beginning. However it was only due to the fact that I assumed "Many to Many" relationship is built the same way as "one to many". Although it's quite different 
+Building **Many to Many** relationship is quite different from One to One or One to Many
 
 You can build "many to many" relationships between two tables using a special feature called `join`  or `junctions` tables which you have to explicitly define
 
@@ -309,17 +281,16 @@ Now the new table `users_to_projects` is used to build a relationship between `p
 }));
 ```
 
-So both relations i.e `usersRelation` and `projectsRelations`  uses middle table `usersToProjects` to represent this many to many relationship between `users` and `projects`. However `usersToProjectsRelation` has only one to one mapping to `projects` and `users`. So this means there can only one combination of user and a project in the `users_to_projects` table
+So both relations i.e `usersRelation` and `projectsRelations` uses the join table `usersToProjects` to represent this many to many relationship between `users` and `projects`. However `usersToProjectsRelation` has only one to one mapping to `projects` and `users`.
 
 So this will enable you to query  projects with all its members by doing
 ```ts
-  const projectWithMemebers = await db.query.projects.findMany({
+  const projectWithMembers = await db.query.projects.findMany({
     with:{
        members:true
     }
   })
 ```
-
 Similartly query users with projects 
 ```ts
   const usersWithProjects = await db.query.users.findMany({
@@ -330,9 +301,9 @@ Similartly query users with projects
 ```
 
 ### Self relations
-Self relations are also possible in drizzle. You will need to create self relations in your project when a table relies on itself to express a parent child relationship.
+Self relations are also possible in drizzle. You will need to create self relations when a table relies on itself to express a parent child relationship.
 
-For instance , in my project I have a table called `tasks`. Each **task** can have many number of **substasks**. This can be expressed by making `tasks` rely on itself. In this instance I needed to create **one to many** self relations
+For instance , in my project I have a table called `tasks`. Each **task** can have many number of **substasks**. This can be expressed by making `tasks` rely on itself because a `subTask` is nothing but a `task` with only one difference `parentTask` field which is needed only for `subTask`. For this case I needed to create **one to many** self relations
 
 ```ts
 export const tasks = mysqlTable("tasks", {
@@ -352,22 +323,99 @@ export const tasksRelation = relations(tasks,({many,one})=>({
     })
 }))
 ```
-Notice how `parentTask` and `subTasks` takes leverage of **relationName** `subTasks` on both sides to achieve this self one to many relationship pattern. This pattern is not documented with an example in drizzle docs 
+Notice how `parentTask` and `subTasks` takes leverage of **relationName** `subTasks` on both sides to achieve this self one to many relationship pattern. 
 
-You can learn more about **Disambigious relations** [here]()
+> This pattern of self relations is not documented with an example in drizzle docs. I used this discord [thread](https://discord.com/channels/1043890932593987624/1173896750663213066/1173896750663213066) to learn more about one to many self relations
 
+`relationName` is used to disambiguate relations from one another. You can learn more about **Disambiguating relations** [here](https://orm.drizzle.team/docs/rqb#disambiguating-relations)
 
+### Foreign Keys
+There is also another way of making relationships between tables which is using foreign keys pattern.
+
+```ts
+  export const projects = mysqlTable("projects", {
+    id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+    name: varchar("name", { length: 256 }).notNull(),
+    space_id: bigint("space_id").references(()=>spaces.id),
+    // ...
+  });  
+```
+Using the `references` utility you add a foreign key constraint using the field `space_id` which is useful for performing cascade actions. You can learn more about that [here](https://orm.drizzle.team/docs/rqb#foreign-keys)
+
+> NOTE: Foreign keys are not [allowed](https://planetscale.com/docs/learn/operating-without-foreign-key-constraints#why-does-planetscale-not-recommend-constraints) in PlanetScale. So you should avoid using `references` when using drizzle with PlanetScale otherwise you will run into migration problems.
+
+### Including relations
+> Drizzle states that the relationships created using `relations` are just an abstraction you need to make your life easier and doesn't do anything to your database schema (except adding foreign key constraint when `references` is used).
+
+Querying relationships become super simple with the help of `relations`. For instance if I want to query a space with all the projects belonging to a space I can do 
+
+```ts
+  const spacesWithProjects = db.query.spaces.findMany({
+    where:eq(spaces.owner,"vj"),
+    with:{
+        projects:true
+    }
+  })
+```
+Here I have used the special `with` operator inside `findMany` which you can use to include the corresponding relations of the table. So drizzle internally does a join of two tables with the referencing information that it has. 
+
+The beauty of using `with` is that it is chainable as deep as you need. Meaning if `projects` has its own relations say `tasks` then you can include them too by doing
+
+```ts
+  const spacesWithProjects = db.query.spaces.findMany({
+    where:eq(spaces.owner,"vj"),
+    with:{
+        projects: {
+            tasks:true
+        }
+    }
+  })
+```
+
+## Flavours of SQL
+Drizzle also lets you write raw SQL queries using the magic `sql` [tagged templates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates)
+
+This is my favorite feature of drizzle. I was able to write complex aggregated joined queries with the help of `sql` function. For instance you can use the `sql` templates to write queries like  
+
+```ts
+   db.select({
+    count:sql<number>`count(*)`
+    name:projects.name
+   })
+   .from(projects)
+```
+This is a simple and not so much useful example. A complex query could look like
+```ts
+const result = await db
+      .select({
+        milestone: milestones,
+        tasksCount: sql<number>`count(${tasks.id})`.mapWith(Number),
+        progress:
+          sql<number>`(sum(case when ${tasks.status}='done' then 1 else 0 end)*100/count(${tasks.id})) as percentage`.mapWith(
+            Number
+          ),
+      })
+      .from(milestones)
+      .leftJoin(tasks, eq(tasks.milestoneId, milestones.id))
+      .groupBy(milestones.id)
+      .where(
+        and(eq(milestones.projectId, projectId), keywordFilter, statusFilter)
+      );
+
+```
+The above query joins two tables `milestones` and `tasks` by using a common field. The **select** statement produces **tasksCount** and **progress** of the milestone using the result of `sql` templates.
+ 
 ## Migration
-Migration is a critical aspect when working with evolving database schemas. They have to be squential and distributed well within your team. So any good ORM tool will also provide utilities for you to manage and maintain your migrations smoothly.
+Migration is a critical aspect when working with evolving database schemas. They have to be sequential and distributed well within your team. So any good ORM tool will also provide utilities for you to manage and maintain your migrations well.
 
-Prisma provides **prisma-migrate** a solid tool that lets you do migrations smoothly. Drizzle also has a great migration tool drizzle-kit that lets you run migration smoothly.
+Prisma provides **prisma-migrate** a solid tool that lets you do migrations quite well. Drizzle also has a great migration tool offered [drizzle-kit](https://orm.drizzle.team/kit-docs/overview) that lets you run migration smoothly.
 
 ### Make migrations
-To create migration using drizzle-kit you need to run the command
+To generate a new migration using drizzle-kit you need to run the following command
 
 `npx drizzle-kit generate:mysql --config=drizzle.config.ts`
 
-The config file depends on environment variables and setup. My config file looks like this
+The config file depends on your environment variables and setup. My config file looks like this
 
 ```ts
 import type { Config } from "drizzle-kit";
@@ -389,7 +437,7 @@ export default {
 ```
 Learn more about the config [here](https://orm.drizzle.team/kit-docs/overview#configuration)
 
-The above command will create **.sql** in your migrations folder which you can run to apply the migration
+The above command will create **.sql** file with random file name in your migrations folder which you can run to apply the migration
 
 ```sql
 CREATE TABLE `projects` (
@@ -414,7 +462,7 @@ CREATE TABLE `spaces` (
 ### Running migration
 Drizzle is pretty agnostic about how you run your migrations. However it still provides utilities for you to run migrations using the `migrate` function for various drivers.
 
-In my project I am using [**planetscale**] as my database. So drizzle provides platform specific options to run migrations using migrate function. The `migrate.ts` file in my project is the following
+In my project I am using [**PlanetScale**] as my database. So drizzle provides platform specific options to run migrations using migrate function. The `migrate.ts` file in my project is the following
 
 ```ts
 import dotenv from "dotenv";
@@ -452,8 +500,8 @@ Drizzle also lets you **drop** migrations using a drop command
 
 `npx drizzle-kit drop --config=drizzle.config.ts`
 
-Dropping migrations is very important before applying a wrong migration schema. Drizzle also tells you not to manually delete any .sql files but use drop utility to make the migration process smoother.
+Dropping migrations is very important for roll backs. Drizzle also tells you not to manually delete any .sql files but use drop utility to make the migration process smoother.
 
 ## Conclusion
 
-So far in my project the experience I got with drizzle has been superb. Even though I am the only person working on this hobby project I can greatly see the benefits of the **drizzle-kit** and **drizzle-orm** scaling well to larger teams. So do yourself a favour by including drizzle in your stack
+So far in my project the experience I got with drizzle has been superb. Even though I am the only person working on this hobby project, I can greatly see the benefits of **drizzle-orm** scaling well in bigger teams. This article only covers a handful of many many awesome features drizzle offers. Tools like [drizzle-studio](https://orm.drizzle.team/drizzle-studio/overview) which I haven't covered in this article is amazing as well. So do yourself a favour by including drizzle in your stack and have a great database experience.
