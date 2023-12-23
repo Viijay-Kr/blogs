@@ -52,6 +52,7 @@ const { meta, og, twitter } = getBlogPostMeta({
 {meta.canonicalUrl && <link rel="canonical" href={meta.canonicalUrl} />}
 
 <!-- Open Graph / Facebook -->
+<meta property="og:site_name" content="Vijayakrishna's Blogs" />
 {og.title && <meta property="og:title" content={og.title} />}
 {og.description && <meta property="og:description" content={og.description} />}
 {og.type && <meta property="og:type" content={og.type} />}
