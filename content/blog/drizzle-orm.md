@@ -2,7 +2,7 @@
 external: false
 title: "Do yourself a favour by including \"drizzle-orm\" in your stack"
 description: "Including drizzle-orm in your backend stack can significantly increase your productivity. Read more here about the nuances of drizzle-orm. Start using drizzle-orm if you are not"
-date: 2023-12-20
+date: 2023-12-24
 heroImageUrl: "https://thumbnails-photos.amazon.com/v1/thumbnail/O5Qyr3aTTQyvbsb-_0VFFQ?viewBox=5788%2C2560&ownerId=AMUQB0W123TUO&groupShareToken=-2Us9Y7TSvuWBPo14PCcxg.uyS2yPlqAwVji3qP2JZ46c"
 ogImagePath: "https://thumbnails-photos.amazon.com/v1/thumbnail/O5Qyr3aTTQyvbsb-_0VFFQ?viewBox=5788%2C2560&ownerId=AMUQB0W123TUO&groupShareToken=-2Us9Y7TSvuWBPo14PCcxg.uyS2yPlqAwVji3qP2JZ46c"
 ogImageAltText: "Drizzle Orm"
