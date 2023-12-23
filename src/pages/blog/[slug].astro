@@ -55,6 +55,9 @@ const ogImageAbsoluteUrl =
     publishDate={frontmatter.date.toISOString()}
     pagePath={`/blog/${slug}`}
     ogImageAbsoluteUrl={ogImageAbsoluteUrl}
+    ogImageAltText={frontmatter.ogImageAltText}
+    ogImageWidth={frontmatter.ogImageWidth}
+    ogImageHeight={frontmatter.ogImageHeight}
     slot="meta"
   />
   <Renderer content={content} slot="content" />
