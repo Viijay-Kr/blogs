@@ -6,7 +6,7 @@ import BlogPostMeta from "../../components/BlogPostMeta.astro";
 import ContentLayout from "../../layouts/ContentLayout.astro";
 import { SITE_URL } from "../../config";
 import HeaderLink from "src/components/HeaderLink.astro";
-
+import { EmbedReactToid } from "src/components/EmbedReactToid";
 export async function getStaticPaths() {
   const posts = await readAll({
     directory: "blog",
@@ -61,4 +61,5 @@ const ogImageAbsoluteUrl =
     slot="meta"
   />
   <Renderer content={content} slot="content" />
+  
 </ContentLayout>

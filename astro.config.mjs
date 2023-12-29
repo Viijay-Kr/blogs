@@ -2,7 +2,7 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-
+import react from '@astrojs/react';
 /* 
   We are doing some URL mumbo jumbo here to tell Astro what the URL of your website will be.
   In local development, your SEO meta tags will have localhost URL.
@@ -13,7 +13,7 @@ import tailwind from "@astrojs/tailwind";
   and leave it empty or use localhost URL. It won't break anything.
 */
 
-const SERVER_PORT = 3000;
+const SERVER_PORT = 3001;
 // the url to access your blog during local development
 const LOCALHOST_URL = `http://localhost:${SERVER_PORT}`;
 // the url to access your blog after deploying it somewhere (Eg. Netlify)
@@ -31,6 +31,7 @@ export default defineConfig({
   server: { port: SERVER_PORT },
   site: BASE_URL,
   integrations: [
+    react(),
     sitemap(),
     tailwind({
       config: { applyBaseStyles: false },

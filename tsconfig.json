@@ -2,7 +2,10 @@
   "extends": "astro/tsconfigs/strict",
   "display": "theme/bubblegum",
   "compilerOptions": {
-    "types": ["astro/client"],
+    "types": [
+      "astro/client"
+    ],
+    "jsx": "preserve",
     "baseUrl": "."
   }
 }
