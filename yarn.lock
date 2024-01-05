@@ -718,10 +718,10 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
 
-"@reacttoid/react@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@reacttoid/react/-/react-0.0.4.tgz#81d54a6596c9ef785e87041caa234c8b83585366"
-  integrity sha512-2SUiTytpdKm1I5Z1gNYKnENHlKsKXdt5iiCkF1+0UYiYrKWEuC7SGzOC7PRqQiie2ZO43o/T547J4QHRIZh1Pg==
+"@reacttoid/react@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@reacttoid/react/-/react-0.0.5.tgz#5155a5fb5d4e40a1942ec14942b2ddaf461f5143"
+  integrity sha512-5ynNqGxTpPX8x6fUazHZBNKm15eplsX61mUy+pmux4pSMPZAGGCcnBQDRBPe4NqH87baNphTwsDval1/eY7gcA==
   dependencies:
     "@radix-ui/react-avatar" "^1.0.4"
     "@radix-ui/react-dialog" "^1.0.5"
