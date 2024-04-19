@@ -2,7 +2,7 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-import react from '@astrojs/react';
+import react from "@astrojs/react";
 /* 
   We are doing some URL mumbo jumbo here to tell Astro what the URL of your website will be.
   In local development, your SEO meta tags will have localhost URL.
@@ -12,7 +12,7 @@ import react from '@astrojs/react';
   If you don't know your website URL yet, don't worry about this
   and leave it empty or use localhost URL. It won't break anything.
 */
-
+import expressiveCode from "astro-expressive-code";
 const SERVER_PORT = 3001;
 // the url to access your blog during local development
 const LOCALHOST_URL = `http://localhost:${SERVER_PORT}`;
@@ -27,14 +27,20 @@ if (isBuild) {
   BASE_URL = LIVE_URL;
 }
 
+// https://astro.build/config
 export default defineConfig({
-  server: { port: SERVER_PORT },
+  server: {
+    port: SERVER_PORT,
+  },
   site: BASE_URL,
   integrations: [
     react(),
     sitemap(),
     tailwind({
-      config: { applyBaseStyles: false },
+      config: {
+        applyBaseStyles: false,
+      },
     }),
+    expressiveCode(),
   ],
 });
