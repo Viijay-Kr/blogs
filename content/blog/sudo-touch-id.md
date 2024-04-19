@@ -1,7 +1,7 @@
 ---
 external: false
-title: "Are you sick of entering your password to perform 'sudo' operations?"
-description: "Are you tiered of entering your password after executing something with 'sudo'. If you are a Mac OS user follow the below simple steps to enable touch id for authenticating sudo commands"
+title: "Are you tiered of entering your password to perform 'sudo' operations?"
+description: "Are you sick of entering your password for your 'sudo' commands?. If you are a Mac OS user follow the below simple steps to enable touch id for authenticating sudo commands"
 date: 2024-04-19
 heroImageUrl: "https://thumbnails-photos.amazon.com/v1/thumbnail/PG5QbLsKS_OjHc-MOVKnQA?ownerId=AMUQB0W123TUO&viewBox=1944%2C1400&groupShareToken=EyXVjeFaThq-2vecLWUjGw.RNMq9lKvj4rwNjCOL36q0t"
 ogImagePath: "https://thumbnails-photos.amazon.com/v1/thumbnail/PG5QbLsKS_OjHc-MOVKnQA?ownerId=AMUQB0W123TUO&viewBox=1944%2C1400&groupShareToken=EyXVjeFaThq-2vecLWUjGw.RNMq9lKvj4rwNjCOL36q0t"
