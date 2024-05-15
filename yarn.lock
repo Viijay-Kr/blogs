@@ -759,10 +759,10 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
 
-"@reacttoid/react@0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@reacttoid/react/-/react-0.0.6.tgz#7470d39f902c96765982070ee4903eaae37067d2"
-  integrity sha512-KAQ3OAaV2uJGA1oXEcp5/TGqKfz761BqQEkhSxKMAB8SXSILlzEdt+HiKiPaAlJy9+U+VqNkTTv8uBlBsWWuNg==
+"@reacttoid/react@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@reacttoid/react/-/react-1.0.3.tgz#687eed5f80fb2f62dd81f01b614d15737f264da5"
+  integrity sha512-piR0MH5JJY4YQvhbwCX7qcOck8ZkvNTxfYVkUVSyQrKhvgNZOfvP8L9h8GGjvZp0HMd39H2bEv60PxCzCHm0Zw==
   dependencies:
     "@radix-ui/react-avatar" "^1.0.4"
     "@radix-ui/react-dialog" "^1.0.5"
@@ -771,6 +771,7 @@
     class-variance-authority "^0.7.0"
     clsx "^2.0.0"
     lucide-react "^0.302.0"
+    posthog-js "^1.131.4"
     tailwind-merge "^2.2.0"
     tailwindcss-animate "^1.0.7"
 
@@ -1773,6 +1774,11 @@ fastq@^1.6.0:
   integrity sha512-wBrocU2LCXXa+lWBt8RoIRD89Fi8OdABODa/kEnyeyjS5aZO5/GNvI5sEINADqP/h8M29UHTHUb53sUu5Ihqdw==
   dependencies:
     reusify "^1.0.4"
+
+fflate@^0.4.8:
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/fflate/-/fflate-0.4.8.tgz#f90b82aefbd8ac174213abb338bd7ef848f0f5ae"
+  integrity sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==
 
 fill-range@^7.0.1:
   version "7.0.1"
@@ -3335,6 +3341,19 @@ postcss@^8.4.23, postcss@^8.4.28, postcss@^8.4.32:
     nanoid "^3.3.7"
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
+
+posthog-js@^1.131.4:
+  version "1.131.4"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.131.4.tgz#b29de94a26132e7cb5abcc16c7b57fd6d918e277"
+  integrity sha512-pKa1p6Q9jRU6s+xSluqGifODMncWTXRaeQw7yVet5U+0U56P0srdMO8NpzllIgDjYL9WLgUjDInucOBw5Cl/tA==
+  dependencies:
+    fflate "^0.4.8"
+    preact "^10.19.3"
+
+preact@^10.19.3:
+  version "10.21.0"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.21.0.tgz#5b0335c873a1724deb66e517830db4fd310c24f6"
+  integrity sha512-aQAIxtzWEwH8ou+OovWVSVNlFImL7xUCwJX3YMqA3U8iKCNC34999fFOnWjYNsylgfPgMexpbk7WYOLtKr/mxg==
 
 prebuild-install@^7.1.1:
   version "7.1.1"
