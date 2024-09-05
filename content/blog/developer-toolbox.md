@@ -4,8 +4,12 @@ title: "A Developer's Toolbox - a peek into my 'developer toolbox'"
 description: "The top tools I use for building web apps in 2024"
 date: 2024-09-06
 heroImageUrl: "/assets/devtoolbox.png"
+heroImageAlt: "My Developer toolbox"
 ogImagePath: "/assets/devtoolbox.png"
-heroImageAlt: "Developer toolbox"
+ogImageAltText: "My developer toolbox"
+ogImageWidth: 1600
+ogImageHeight: 800
+heroImageAlt: "My developer toolbox"
 ---
 
 
