@@ -9,7 +9,6 @@ ogImagePath: "/assets/devtoolbox.png"
 ogImageAltText: "My developer toolbox"
 ogImageWidth: 1600
 ogImageHeight: 800
-heroImageAlt: "My developer toolbox"
 ---
 
 
