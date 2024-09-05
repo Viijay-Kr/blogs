@@ -4,8 +4,8 @@ title: "Typescript Language Service Plugins | Part 2"
 description: "Typescript plugins inside VS code extension runtime"
 draft: false
 date: 2022-03-05
-heroImageUrl: "https://raw.githubusercontent.com/orta/TypeScript-TSServer-Plugin-Template/main/docs/screenshot.png"
-ogImagePath: "https://raw.githubusercontent.com/orta/TypeScript-TSServer-Plugin-Template/main/docs/screenshot.png"
+heroImageUrl: "/assets/typescript-part2.png"
+ogImagePath: "/assets/typescript-part2.png"
 heroImageAlt: "Sample plugin"
 ---
 
